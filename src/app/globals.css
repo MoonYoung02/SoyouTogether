@@ -1,0 +1,72 @@
+@import "leaflet/dist/leaflet.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f3f4f6;
+  --card: #ffffff;
+  --card-soft: #f8fafc;
+  --line: #e2e8f0;
+  --text: #111827;
+  --muted: #6b7280;
+  --brand: #3e5bf2;
+  --brand-dark: #2137b5;
+  --success-bg: #d9f0d7;
+  --success-text: #1e7a34;
+  --radius-lg: 22px;
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at 20% 0%, #eef2ff 0%, var(--bg) 36%);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@layer components {
+  .surface-card {
+    @apply rounded-2xl border bg-white;
+    border-color: var(--line);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .section-title {
+    @apply text-2xl font-semibold tracking-tight text-slate-900;
+  }
+
+  .kicker {
+    @apply text-xs font-medium text-slate-500;
+  }
+
+  .soft-pill {
+    @apply inline-flex items-center rounded-full border px-2.5 py-1 text-xs;
+    border-color: #cbd5e1;
+    background: #f8fafc;
+    color: #475569;
+  }
+
+  .primary-btn {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold text-white transition;
+    background: linear-gradient(120deg, var(--brand) 0%, #4b6df6 65%, #5b7bf8 100%);
+  }
+
+  .primary-btn:hover {
+    background: linear-gradient(120deg, var(--brand-dark) 0%, #3a57e8 70%, #4966ed 100%);
+  }
+
+  .ghost-btn {
+    @apply inline-flex items-center justify-center rounded-full border px-5 py-2.5 text-sm font-semibold text-slate-700 transition;
+    border-color: #cbd5e1;
+    background: #fff;
+  }
+
+  .ghost-btn:hover {
+    background: #f8fafc;
+  }
+}

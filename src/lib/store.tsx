@@ -151,7 +151,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
             return item;
           }
           const nextReserved = item.reservedAmount + amount;
-          const nextStatus = nextReserved >= item.targetPrice ? "VOTING_MET" : item.status;
+          const nextStatus: AppState["properties"][number]["status"] = nextReserved >= item.targetPrice ? "VOTING_MET" : item.status;
+
           return {
             ...item,
             reservedAmount: nextReserved,
@@ -229,35 +230,35 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         return { ok: false, message: "현재 단계에서는 공모를 오픈할 수 없습니다." };
       }
 
-      setState((prev) => {
-        const before = prev.properties.find((item) => item.id === propertyId);
-        const nextProperties = prev.properties.map((item) =>
-          item.id === propertyId ? { ...item, status: "PUBLIC_OFFER" } : item
-        );
-        const after = nextProperties.find((item) => item.id === propertyId);
-        const nextEvents = [...prev.demandEvents];
+setState((prev): AppState => {
+  const before = prev.properties.find((item) => item.id === propertyId);
+  const nextProperties: AppState["properties"] = prev.properties.map((item) =>
+    item.id === propertyId ? { ...item, status: "PUBLIC_OFFER" as const } : item
+  );
+  const after = nextProperties.find((item) => item.id === propertyId);
+  const nextEvents = [...prev.demandEvents];
 
-        if (before && after) {
-          nextEvents.unshift(
-            createDemandEvent({
-              userId: prev.user.id,
-              propertyId,
-              address: before.address,
-              eventType: "STAGE_CHANGE",
-              intentAmount: 0,
-              statusBefore: before.status,
-              statusAfter: after.status,
-              sessionId: sessionIdRef.current
-            })
-          );
-        }
+  if (before && after) {
+    nextEvents.unshift(
+      createDemandEvent({
+        userId: prev.user.id,
+        propertyId,
+        address: before.address,
+        eventType: "STAGE_CHANGE",
+        intentAmount: 0,
+        statusBefore: before.status,
+        statusAfter: after.status,
+        sessionId: sessionIdRef.current
+      })
+    );
+  }
 
-        return {
-          ...prev,
-          properties: nextProperties,
-          demandEvents: nextEvents
-        };
-      });
+  return {
+    ...prev,
+    properties: nextProperties,
+    demandEvents: nextEvents
+  };
+});
 
       showToast("공모가 오픈되었습니다.");
       return { ok: true, message: "공모가 오픈되었습니다." };
@@ -305,7 +306,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         const hasActiveAfter = nextReservations.some(
           (entry) => entry.propertyId === reservation.propertyId && entry.status === "ACTIVE"
         );
-        const nextPropertyStatus = hasActiveAfter ? beforeProperty?.status : "TRADABLE";
+        const nextPropertyStatus: AppState["properties"][number]["status"] =
+  hasActiveAfter ? beforeProperty?.status ?? "PUBLIC_OFFER" : "TRADABLE";
 
         return {
           ...prev,

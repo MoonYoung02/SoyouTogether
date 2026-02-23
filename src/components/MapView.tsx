@@ -46,10 +46,14 @@ function FitToBounds({ properties, selectedId }: { properties: Property[]; selec
 }
 
 export function MapView({ properties, selectedId, onSelect, className, mapClassName }: MapViewProps) {
-  const first = properties.find(
-    (property) => typeof property.lat === "number" && typeof property.lng === "number"
-  );
-  const center: [number, number] = first ? [first.lat, first.lng] : [37.5665, 126.978];
+const first = properties.find(
+  (property) => typeof property.lat === "number" && typeof property.lng === "number"
+);
+
+const center: [number, number] =
+  first && typeof first.lat === "number" && typeof first.lng === "number"
+    ? [first.lat, first.lng]
+    : [37.5665, 126.978];
 
   return (
     <div className={className ?? "overflow-hidden rounded border border-slate-300 bg-white"}>

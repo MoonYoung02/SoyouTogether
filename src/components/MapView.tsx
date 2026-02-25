@@ -97,7 +97,6 @@ const center: [number, number] =
                 <div className="text-xs">
                   <p className="font-semibold">{property.name}</p>
                   <p>{property.address}</p>
-                  <p>수익률 {formatPercent(property.predictedYield)}</p>
                   <p>진행률 {formatPercent(progress)}</p>
                 </div>
               </Popup>

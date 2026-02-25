@@ -28,8 +28,8 @@ export default function LandingPage() {
         </div>
         <div className="rounded-3xl border border-slate-200 bg-gradient-to-b from-[#4b63f5] to-[#3655ef] p-6 text-white shadow-sm">
           <p className="text-sm text-blue-100">오늘의 하이라이트</p>
-          <p className="mt-3 text-3xl font-semibold">누적 수익률 17.2%</p>
-          <p className="mt-1 text-sm text-blue-100">소유 3호 매각 완료 기준</p>
+          <p className="mt-3 text-3xl font-semibold">공모 준비 12건 진행 중</p>
+          <p className="mt-1 text-sm text-blue-100">사용자 투표 기반 매입 검토 현황</p>
           <div className="mt-6 rounded-2xl bg-white/15 p-4">
             <p className="text-xs text-blue-100">현재 데모에서 가능한 액션</p>
             <ul className="mt-2 space-y-1.5 text-sm">

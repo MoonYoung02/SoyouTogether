@@ -47,8 +47,8 @@ export default function DashboardPage() {
       <section className="surface-card overflow-hidden">
         <div className="grid gap-4 bg-[var(--success-bg)] px-5 py-5 sm:grid-cols-[1fr_auto] sm:items-center">
           <div>
-            <p className="text-3xl font-semibold tracking-tight text-[var(--success-text)]">누적 수익률 {formatPercent(17.2)} 달성</p>
-            <p className="mt-1 text-sm text-[#397c46]">소유 3호 매각 완료 기준 성과</p>
+            <p className="text-3xl font-semibold tracking-tight text-[var(--success-text)]">사용자 참여 기반 매입 모델 운영 중</p>
+            <p className="mt-1 text-sm text-[#397c46]">사전예약 데이터로 공모 후보를 검토합니다.</p>
           </div>
           <div className="rounded-full bg-yellow-200 px-4 py-3 text-sm font-semibold text-yellow-800">성과 배지</div>
         </div>
@@ -56,10 +56,8 @@ export default function DashboardPage() {
           <h2 className="section-title text-[34px]">새로운 건물을 준비 중이에요</h2>
           <p className="mt-1 text-sm text-slate-500">329,816명이 관심 가지는 중</p>
           <div className="mt-4 rounded-3xl border border-slate-200 bg-slate-50 p-5">
-            <p className="text-2xl font-semibold text-slate-900">
-              매각 상품 누적 수익률 <span className="text-rose-500">+17.2%</span>
-            </p>
-            <p className="mt-1 text-sm text-slate-500">26년 1분기 기준</p>
+            <p className="text-2xl font-semibold text-slate-900">사전예약 목표 달성 매물 8건</p>
+            <p className="mt-1 text-sm text-slate-500">2026년 1분기 기준</p>
             <div className="mt-4 flex gap-1.5">
               <span className="h-2 w-2 rounded-full bg-[#3e5bf2]" />
               <span className="h-2 w-2 rounded-full bg-slate-300" />

@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ReservationPanel } from "@/components/ReservationPanel";
-import { formatPercent, formatWon } from "@/lib/format";
+import { formatWon } from "@/lib/format";
 import { useStore } from "@/lib/store";
 import type { Property } from "@/lib/types";
 import { statusLabel } from "@/lib/workflow";
@@ -51,8 +51,6 @@ function PropertyListItem({
           <p className="mt-1 truncate text-sm text-slate-500">{property.address}</p>
           <div className="mt-2 flex items-center gap-2 text-xs text-slate-600">
             <span>{property.type}</span>
-            <span>위험 {property.riskGrade}</span>
-            <span>수익률 {formatPercent(property.predictedYield)}</span>
           </div>
           <p className="mt-1 text-xs font-medium text-slate-600">
             단계 {statusLabel[property.status]} · 참여자 {property.voterCount.toLocaleString("ko-KR")}명
@@ -74,8 +72,6 @@ export default function BrowsePage() {
   const { properties, user, createReservation } = useStore();
   const [region, setRegion] = useState("전체");
   const [assetType, setAssetType] = useState("전체");
-  const [risk, setRisk] = useState("전체");
-  const [minYield, setMinYield] = useState(0);
   const [kakaoFailed, setKakaoFailed] = useState(false);
   const [kakaoFailReason, setKakaoFailReason] = useState<string>("");
   const [selectedId, setSelectedId] = useState<string>("");
@@ -85,11 +81,9 @@ export default function BrowsePage() {
     return properties.filter((property) => {
       const passRegion = includesRegion(property.address, region);
       const passType = assetType === "전체" ? true : property.type === assetType;
-      const passRisk = risk === "전체" ? true : property.riskGrade === risk;
-      const passYield = property.predictedYield >= minYield;
-      return passRegion && passType && passRisk && passYield;
+      return passRegion && passType;
     });
-  }, [assetType, minYield, properties, region, risk]);
+  }, [assetType, properties, region]);
 
   const selected: Property | undefined = filtered.find((item) => item.id === selectedId);
 
@@ -153,28 +147,6 @@ export default function BrowsePage() {
             <option>인천</option>
             <option>대전</option>
           </select>
-          <select
-            className="rounded border border-slate-300 bg-white px-3 py-2 text-sm"
-            value={risk}
-            onChange={(event) => setRisk(event.target.value)}
-          >
-            <option>전체</option>
-            <option>LOW</option>
-            <option>MID</option>
-            <option>HIGH</option>
-          </select>
-          <label className="ml-1 flex items-center gap-2 text-xs text-slate-600">
-            최소 수익률 {minYield.toFixed(1)}%
-            <input
-              className="w-28"
-              type="range"
-              min={0}
-              max={12}
-              step={0.1}
-              value={minYield}
-              onChange={(event) => setMinYield(Number(event.target.value))}
-            />
-          </label>
         </div>
       </header>
 

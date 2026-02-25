@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { calcProgress, formatPercent, formatWon } from "@/lib/format";
+import { calcProgress, formatWon } from "@/lib/format";
 import type { Property } from "@/lib/types";
 import { statusDescription, statusLabel } from "@/lib/workflow";
 import { ProgressBar } from "@/components/ProgressBar";
@@ -29,7 +29,6 @@ export function PropertyCard({ property, selected, onSelect }: PropertyCardProps
       </div>
       <div className="grid grid-cols-2 gap-2 text-xs text-slate-700">
         <p>유형: {property.type}</p>
-        <p>위험도: {property.riskGrade}</p>
         <p>목표금액: {formatWon(property.targetPrice)}</p>
         <p>사전예약금: {formatWon(property.reservedAmount)}</p>
       </div>
@@ -38,8 +37,7 @@ export function PropertyCard({ property, selected, onSelect }: PropertyCardProps
       <div className="mt-2">
         <ProgressBar value={progress} />
       </div>
-      <div className="mt-2 flex items-center justify-between text-xs">
-        <p className="font-medium text-slate-700">예상수익률 {formatPercent(property.predictedYield)}</p>
+      <div className="mt-2 flex items-center justify-end text-xs">
         <div className="flex items-center gap-2">
           {canOpen ? <span className="rounded-full border border-[#2137b5] px-2 py-0.5 text-[#2137b5]">공모 가능</span> : null}
           <Link className="font-medium text-[#2c46d7] underline" href={`/property/${property.id}`}>

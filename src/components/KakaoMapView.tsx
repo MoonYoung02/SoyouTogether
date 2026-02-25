@@ -321,7 +321,6 @@ export function KakaoMapView({
       `<div style="padding:8px 10px; font-size:12px; line-height:1.45; min-width:180px;">
         <div style="font-weight:600; margin-bottom:3px;">${selectedProperty.name}</div>
         <div>${selectedProperty.address}</div>
-        <div>수익률 ${formatPercent(selectedProperty.predictedYield)}</div>
         <div>진행률 ${formatPercent(progress)}</div>
       </div>`
     );

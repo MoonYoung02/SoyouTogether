@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import { useParams } from "next/navigation";
 import { ProgressBar } from "@/components/ProgressBar";
 import { ReservationPanel } from "@/components/ReservationPanel";
-import { calcProgress, formatDate, formatPercent, formatWon } from "@/lib/format";
+import { calcProgress, formatDate, formatWon } from "@/lib/format";
 import { useStore } from "@/lib/store";
 import { canFulfill, canOpenOffer, canReserve, statusDescription, statusLabel } from "@/lib/workflow";
 
@@ -58,9 +58,7 @@ export default function PropertyDetailPage() {
           <p className="mt-1 text-sm text-blue-100">{property.address}</p>
         </div>
         <div className="p-5">
-          <p className="text-sm text-slate-600">
-            유형 {property.type} | 예상수익률 {formatPercent(property.predictedYield)} | 위험도 {property.riskGrade}
-          </p>
+          <p className="text-sm text-slate-600">유형 {property.type}</p>
           <p className="mt-1 text-sm text-slate-600">참여자 {property.voterCount.toLocaleString("ko-KR")}명</p>
           <p className="mt-1 text-xs text-slate-500">{property.stageNote ?? statusDescription[property.status]}</p>
         </div>
